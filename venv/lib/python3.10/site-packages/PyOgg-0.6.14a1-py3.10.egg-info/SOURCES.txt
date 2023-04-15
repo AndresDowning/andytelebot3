@@ -1,0 +1,17 @@
+COPYING
+LICENSE
+MANIFEST.in
+README.md
+README.rst
+setup.cfg
+setup.py
+PyOgg.egg-info/PKG-INFO
+PyOgg.egg-info/SOURCES.txt
+PyOgg.egg-info/dependency_links.txt
+PyOgg.egg-info/top_level.txt
+pyogg/__init__.py
+pyogg/flac.py
+pyogg/library_loader.py
+pyogg/ogg.py
+pyogg/opus.py
+pyogg/vorbis.py
