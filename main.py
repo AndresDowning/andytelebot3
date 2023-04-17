@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Replace with your actual OpenAI API key and Telegram token
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 TELEGRAM_TOKEN = "6227413852:AAFb8O-vLFQ8l38qM-TtuA8HD9e-1rmcwFc"
 
 openai.api_key = OPENAI_API_KEY
