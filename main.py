@@ -3,7 +3,7 @@ import openai
 import requests
 from telegram import Voice, Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
-import av
+from pydub import AudioSegment
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,22 +15,9 @@ TELEGRAM_TOKEN = "6227413852:AAFb8O-vLFQ8l38qM-TtuA8HD9e-1rmcwFc"
 openai.api_key = OPENAI_API_KEY
 
 def convert_ogg_to_mp3(input_path, output_path):
-    input_container = av.open(input_path)
-    output_container = av.open(output_path, mode="w")
+    ogg_audio = AudioSegment.from_ogg(input_path)
+    ogg_audio.export(output_path, format="mp3")
 
-    input_stream = input_container.streams.audio[0]
-    output_stream = output_container.add_stream("mp3", rate=input_stream.rate)
-
-    for frame in input_container.decode(input_stream):
-        for packet in output_stream.encode(frame):
-            output_container.mux(packet)
-
-    # Flush remaining packets
-    for packet in output_stream.encode(None):
-        output_container.mux(packet)
-
-    input_container.close()
-    output_container.close()
 
 def summarize_text(text):
     prompt = f"Organiza las ideas y resume el siguiente texto en bullet points::\n\n{text}\n\nResumen:"
