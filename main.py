@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import audioread
 import io
 from pydub import AudioSegment
+import ffmpeg
 
 
 # Set the path to the FFmpeg executable
@@ -22,16 +23,9 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 openai.api_key = OPENAI_API_KEY
 
 def convert_ogg_to_mp3(input_path, output_path):
-    with audioread.audio_open(input_path) as ogg_audio:
-        raw_data = b"".join(list(ogg_audio.read_data()))
-        input_audio = AudioSegment.from_raw(
-            io.BytesIO(raw_data),
-            sample_width=ogg_audio.sampwidth,
-            frame_rate=ogg_audio.samplerate,
-            channels=ogg_audio.channels,
-            format="ogg",
-        )
-        input_audio.export(output_path, format="mp3")
+    stream = ffmpeg.input(input_path)
+    stream = ffmpeg.output(stream, output_path)
+    ffmpeg.run(stream)
 
 def summarize_text(text):
     prompt = f"Organiza las ideas y resume el siguiente texto en bullet points::\n\n{text}\n\nResumen:"
