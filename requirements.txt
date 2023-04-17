@@ -2,3 +2,4 @@ python-telegram-bot==13.7
 openai
 requests
 pydub==0.25.1
+python-dotenv==0.19.2
