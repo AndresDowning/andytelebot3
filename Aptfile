@@ -1,3 +1,5 @@
 ffmpeg
 libpulse0
 pulseaudio
+libasound2
+libasound2-plugins
