@@ -3,10 +3,10 @@ import openai
 import requests
 from telegram import Voice, Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
-from pydub_ffmpeg import AudioSegment
 from dotenv import load_dotenv
 import audioread
 import io
+from pydub import AudioSegment
 
 
 # Set the path to the FFmpeg executable
@@ -25,7 +25,11 @@ def convert_ogg_to_mp3(input_path, output_path):
     with audioread.audio_open(input_path) as ogg_audio:
         raw_data = b"".join(list(ogg_audio.read_data()))
         input_audio = AudioSegment.from_raw(
-            io.BytesIO(raw_data), sample_width=ogg_audio.sampwidth, frame_rate=ogg_audio.samplerate, channels=ogg_audio.channels
+            io.BytesIO(raw_data),
+            sample_width=ogg_audio.sampwidth,
+            frame_rate=ogg_audio.samplerate,
+            channels=ogg_audio.channels,
+            format="ogg",
         )
         input_audio.export(output_path, format="mp3")
 
