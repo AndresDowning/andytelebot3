@@ -18,7 +18,6 @@ def convert_ogg_to_mp3(input_path, output_path):
     ogg_audio = AudioSegment.from_ogg(input_path)
     ogg_audio.export(output_path, format="mp3")
 
-
 def summarize_text(text):
     prompt = f"Organiza las ideas y resume el siguiente texto en bullet points::\n\n{text}\n\nResumen:"
     response = openai.Completion.create(
