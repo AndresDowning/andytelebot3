@@ -3,8 +3,9 @@ import openai
 import requests
 from telegram import Voice, Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
-from pydub import AudioSegment
+from pydub_ffmpeg import AudioSegment
 from dotenv import load_dotenv
+
 
 # Set the path to the FFmpeg executable
 AudioSegment.converter = os.environ.get("FFMPEG_BIN", "/app/vendor/ffmpeg/ffmpeg")
@@ -13,8 +14,8 @@ AudioSegment.converter = os.environ.get("FFMPEG_BIN", "/app/vendor/ffmpeg/ffmpeg
 load_dotenv()
 
 # Replace with your actual OpenAI API key and Telegram token
-OPENAI_API_KEY = "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"
-TELEGRAM_TOKEN = "6227413852:AAFb8O-vLFQ8l38qM-TtuA8HD9e-1rmcwFc"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 openai.api_key = OPENAI_API_KEY
 
